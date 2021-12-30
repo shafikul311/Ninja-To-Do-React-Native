@@ -4,7 +4,7 @@
 <p>-- CD Ninja-ToDo </p>
 <p>-- expo start</p>
 <p>-- Welcome to Ninja to-to list</p>
-<p>-- </p>
+<p> </p>
 <p> </p>
 <p> </p>
 <p> </p>
