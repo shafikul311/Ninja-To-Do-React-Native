@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet,SafeAreaView, Text, View, FlatList, Button, TextInput,TouchableWithoutFeedback, Keyboard  } from 'react-native';
 import AddTodo from './components/AddToDo';
 import Header from './components/Header/Header';
 import TodoItem from './components/TodoItem';
@@ -14,6 +14,7 @@ export default function App() {
     { text: 'play on the switch', key: '3' }
   ]);
 
+
   
   const pressHandler = (key) => {
     setTodos(prevTodos => {
@@ -21,26 +22,41 @@ export default function App() {
     });
   };
 
-  const submitHandler = (text) => {
-    if(text.length > 3){
-      setText('');
-      setTodos(prevTodos => {
-        return [
-          { text, key: Math.random().toString() },
-          ...prevTodos
-        ];
-      });
-    } else {
-      Alert.alert('OOPS', 'Todo must be over 3 characters long', [
-        {text: 'Understood', onPress: () => console.log('alert closed') }
-      ]);
-    }
-  };
+  // const submitHandler = (text) => {
+  //   if(text.length > 3){
+  //     setText('');
+  //     setTodos(prevTodos => {
+  //       return [
+  //         { text, key: Math.random().toString() },
+  //         ...prevTodos
+  //       ];
+  //     });
+  //   } else {
+  //     Alert.alert('OOPS', 'Todo must be over 3 characters long', [
+  //       {text: 'Understood', onPress: () => console.log('alert closed') }
+  //     ]);
+  //   }
+  // };
 
 
   return (
+    <TouchableWithoutFeedback 
+    onSubmit={Keyboard.dismiss()}
+    >
     <View style={styles.container}>
       <Header/>
+      <SafeAreaView>
+        
+          <TextInput
+           style={styles.input}
+           placeholder="Input please"
+           
+          
+          /> 
+        <View style={styles.buttonStyle}> 
+          <Button  title='Submit Now'/>
+        </View>
+      </SafeAreaView>
       <View>
         {/* <AddTodo submitHandler={submitHandler} /> */}
         <View style={styles.list}>
@@ -53,16 +69,27 @@ export default function App() {
         
         </View>
       </View>
-
     </View>
+
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
+
+
   container: {
+    marginTop: 50,
     flex: 1,
-    backgroundColor: '#f1f2f6',
     alignItems: 'center',
+  },
+
+  input: {
+    height: 35,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10,
   },
 
   list: {
@@ -71,6 +98,12 @@ const styles = StyleSheet.create({
  
 
   },
+
+  buttonStyle: {
+    marginTop: 50,
+    borderRadius: 50,
+    
+  }
   
   
 });
